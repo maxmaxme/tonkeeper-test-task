@@ -1,0 +1,56 @@
+.transaction {
+    background: var(--background-color-secondary);
+    padding: 20px;
+    border-bottom: 1px solid var(--background-color-light);
+}
+
+.transaction .content {
+    display: flex;
+}
+
+.transaction .comment {
+    margin-left: 70px;
+    margin-right: 76px;
+    margin-top: 12px;
+
+    background: var(--background-color-light);
+    padding: 14px 18px;
+    border-radius: 8px 18px 18px 18px;
+    overflow: hidden;
+    word-wrap: anywhere; /* todo */
+}
+
+.icon {
+    width: 50px;
+    height: 50px;
+    background: var(--background-color-icon);
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.headers {
+    margin-left: 20px;
+    padding-top: 5px;
+    flex: 1;
+}
+
+.headers .direction {
+    font-weight: bold;
+}
+
+.headers .secondary {
+    color: var(--text-color-secondary)
+}
+
+.amount {
+    text-align: right;
+}
+
+.amount .sum {
+    color: var(--text-color-success);
+    font-weight: bold;
+}
+
+.amount .keeperNumber {
+    color: var(--text-color-secondary);
+}
