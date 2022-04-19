@@ -1,10 +1,11 @@
 import { createContext, Dispatch } from 'react';
 import { Action } from './actions';
-import { Transaction } from '../types/transaction';
+import { Transaction, TransactionId } from '../types/transaction';
 
 export type AppContextType<T> = {
   state: {
     transactions: Transaction[],
+    lastTxId?: TransactionId,
     documentTitle: string,
   }
   dispatch: T,

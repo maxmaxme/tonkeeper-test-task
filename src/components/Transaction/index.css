@@ -39,7 +39,8 @@
 }
 
 .headers .secondary {
-    color: var(--text-color-secondary)
+    color: var(--text-color-secondary);
+    margin-top: 6px;
 }
 
 .amount {
@@ -47,10 +48,13 @@
 }
 
 .amount .sum {
-    color: var(--text-color-success);
     font-weight: bold;
 }
+.amount .sum.income {
+    color: var(--text-color-success);
+}
 
-.amount .keeperNumber {
+.amount .walletNumber {
+    margin-top: 6px;
     color: var(--text-color-secondary);
 }
