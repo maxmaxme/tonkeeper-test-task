@@ -7,6 +7,6 @@ export const getMethodUrl = (method: string, params: {[key: string]: string | nu
     }
     return key + '=' + params[key];
   })
-    .filter((v) => v === undefined)
+    .filter((v) => v !== undefined)
     .join('&');
 };
