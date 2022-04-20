@@ -1,19 +1,56 @@
-import React from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { TransactionsList } from '../TransactionsList';
-import { Transaction } from '../../types/transaction';
 import styles from './index.css';
+import { getTransactionList } from '../../api/transactions/list';
+import { Actions } from '../../store/actions';
+import { AppContext } from '../../store/context';
+import { TransactionId } from '../../types/transaction';
 
 export const App = () => {
-  const transactions: Transaction[] = [
-    { transaction_id: '123213123', amount: '123123123', currency: 'TON', direction: 'out', keeperNumber: 'ewfdscewfedsdsvv' },
-    { transaction_id: '123213124', amount: '123123123', currency: 'TON', direction: 'in', keeperNumber: 'ewfdscewfedsdsvv', comment: 'test comment lol test' },
-    { transaction_id: '1232131244', amount: '123123123', currency: 'TON', direction: 'in', keeperNumber: 'ewfdscewfedsdsvv', comment: 'testcommentloldsfvcsdtest' },
-    { transaction_id: '123213125', amount: '123123123', currency: 'TON', direction: 'in', keeperNumber: 'ewfdscewfedsdsvv' },
-    { transaction_id: '123213126', amount: '123123123', currency: 'TON', direction: 'out', keeperNumber: 'ewfdscewfedsdsvv' },
-  ];
+  const { state: { transactions }, dispatch } = useContext(AppContext);
+  const [isLoading, setIsLoading] = useState(false);
+  const [nextTxId, setNextTxId] = useState<TransactionId | undefined>();
+
+  const loadTransactions = useCallback((lastTxId?: TransactionId) => {
+    if (isLoading) {
+      return;
+    }
+    setIsLoading(true);
+    getTransactionList({
+      address: 'EQD2NmD_lH5f5u1Kj3KfGyTvhZSX0Eg6qp2a5IQUKXxOG21n',
+      limit: 2,
+      transactionId: lastTxId,
+    })
+      .then(({ transactions, nextTransactionId }) => {
+        dispatch({
+          type: Actions.APPEND_TRANSACTIONS,
+          payload: transactions,
+        });
+        dispatch({ type: Actions.SET_DOCUMENT_TITLE, payload: 'Transactions' });
+        setNextTxId(nextTransactionId);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, [dispatch, nextTxId]);
+
+  const onLoadMore = useCallback(() => {
+    if (nextTxId) {
+      loadTransactions(nextTxId);
+    }
+  }, [loadTransactions, nextTxId]);
+
+  useEffect(() => {
+    loadTransactions();
+  }, []);
+
   return (
     <div className={styles.transactionsList}>
-      <TransactionsList transactions={transactions} />
+      <TransactionsList
+        transactions={transactions}
+        onLoadMore={onLoadMore}
+      />
+      {isLoading && <div>Loading...</div>}
     </div>
   );
 };

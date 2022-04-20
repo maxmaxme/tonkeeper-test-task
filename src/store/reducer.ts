@@ -9,6 +9,11 @@ export const reducer = (state: AppContextType<Dispatch<Action>>['state'], action
       ...state,
       documentTitle: action.payload,
     };
+  case Actions.APPEND_TRANSACTIONS:
+    return {
+      ...state,
+      transactions: state.transactions.concat(action.payload),
+    };
   default:
     // @ts-ignore
     throw new Error(`reducer for ${action.type} not found`);

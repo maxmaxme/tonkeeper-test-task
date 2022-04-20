@@ -1,8 +1,12 @@
+/* eslint-disable no-unused-vars */
+import { Transaction } from '../types/transaction';
+
 export enum Actions {
-  // eslint-disable-next-line no-unused-vars
-  SET_DOCUMENT_TITLE = 'SET_DOCUMENT_TITLE'
+  SET_DOCUMENT_TITLE = 'SET_DOCUMENT_TITLE',
+  APPEND_TRANSACTIONS = 'APPEND_TRANSACTIONS',
 }
 
 export type Action =
   | { type: Actions.SET_DOCUMENT_TITLE, payload: string }
-;
+  | { type: Actions.APPEND_TRANSACTIONS, payload: Transaction[] }
+  ;

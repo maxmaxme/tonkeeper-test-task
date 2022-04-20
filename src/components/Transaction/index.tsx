@@ -1,38 +1,50 @@
 import React from 'react';
+import cn from 'classnames';
 import { Transaction as TransactionType } from '../../types/transaction';
 import styles from './index.css';
+import { TransactionIcon } from '../TransactionIcon';
 
 type Props = {
   transaction: TransactionType;
 };
 
-const formatKeeperNumber = (keeperNumber: string) => {
-  return keeperNumber.slice(0, 3) + '...' + keeperNumber.slice(-3);
+const formatwalletNumber = (walletNumber: string) => {
+  return walletNumber.slice(0, 3) + '...' + walletNumber.slice(-3);
 };
 
 export const Transaction = ({
   transaction,
 }: Props) => {
+  const isIn = !!transaction.in_msg.source;
+  const msg = isIn ? transaction.in_msg : transaction.out_msgs[0];
+  const {
+    value: amount,
+    destination: walletNumber,
+    message: comment,
+  } = msg;
+  const currency = 'TON';
+
   return (
     <div className={styles.transaction}>
       <div className={styles.content}>
-        <div className={styles.icon}>{transaction.direction === 'in' ? 'in' : 'out'}</div>
+        <div className={styles.icon}><TransactionIcon dir={isIn ? 'down' : 'up'} /></div>
         <div className={styles.headers}>
-          <div className={styles.direction}>{transaction.direction === 'in' ? 'Received' : 'Sent'}</div>
-          <div className={styles.secondary}>{transaction.direction === 'in' ? 'From' : 'To'}</div>
+          <div className={styles.direction}>{isIn ? 'Received' : 'Sent'}</div>
+          <div className={styles.secondary}>{isIn ? 'From' : 'To'}</div>
         </div>
         <div className={styles.amount}>
-          <div className={styles.sum}>
-            {transaction.direction === 'in' ? '+' : '-'}
-            {transaction.amount}&nbsp;{transaction.currency}
+          <div className={cn(styles.sum, { [styles.income]: isIn })}>
+            {isIn ? '+' : '-'}&nbsp;
+            {amount}&nbsp;
+            {currency}
           </div>
-          <div className={styles.keeperNumber}>
-            {formatKeeperNumber(transaction.keeperNumber)}
+          <div className={styles.walletNumber}>
+            {formatwalletNumber(walletNumber)}
           </div>
         </div>
       </div>
-      {transaction.comment && (
-        <div className={styles.comment}>{transaction.comment}</div>
+      {comment && (
+        <div className={styles.comment}>{comment}</div>
       )}
     </div>
   );

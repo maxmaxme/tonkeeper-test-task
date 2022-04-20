@@ -1,3 +1,3 @@
-# Template
+# TonKeeper test assignment
 
-Empty template with React, Typescript, ESLint and Jest
+// todo

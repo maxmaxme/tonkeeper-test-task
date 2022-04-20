@@ -5,6 +5,7 @@
 }
 
 .transaction .content {
+    overflow: hidden;
     display: flex;
 }
 
@@ -21,17 +22,14 @@
 }
 
 .icon {
-    width: 50px;
-    height: 50px;
-    background: var(--background-color-icon);
-    border-radius: 50%;
-    overflow: hidden;
+    flex: none;
 }
 
 .headers {
     margin-left: 20px;
     padding-top: 5px;
     flex: 1;
+    overflow: hidden;
 }
 
 .headers .direction {
@@ -39,18 +37,23 @@
 }
 
 .headers .secondary {
-    color: var(--text-color-secondary)
+    color: var(--text-color-secondary);
+    margin-top: 6px;
 }
 
 .amount {
+    justify-content: end;
     text-align: right;
 }
 
 .amount .sum {
-    color: var(--text-color-success);
     font-weight: bold;
 }
+.amount .sum.income {
+    color: var(--text-color-success);
+}
 
-.amount .keeperNumber {
+.amount .walletNumber {
+    margin-top: 6px;
     color: var(--text-color-secondary);
 }
