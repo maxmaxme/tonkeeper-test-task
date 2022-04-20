@@ -5,6 +5,7 @@
 }
 
 .transaction .content {
+    overflow: hidden;
     display: flex;
 }
 
@@ -21,17 +22,14 @@
 }
 
 .icon {
-    width: 50px;
-    height: 50px;
-    background: var(--background-color-icon);
-    border-radius: 50%;
-    overflow: hidden;
+    flex: none;
 }
 
 .headers {
     margin-left: 20px;
     padding-top: 5px;
     flex: 1;
+    overflow: hidden;
 }
 
 .headers .direction {
@@ -44,6 +42,7 @@
 }
 
 .amount {
+    justify-content: end;
     text-align: right;
 }
 

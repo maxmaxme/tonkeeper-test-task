@@ -2,6 +2,7 @@ import React from 'react';
 import cn from 'classnames';
 import { Transaction as TransactionType } from '../../types/transaction';
 import styles from './index.css';
+import { TransactionIcon } from '../TransactionIcon';
 
 type Props = {
   transaction: TransactionType;
@@ -26,7 +27,7 @@ export const Transaction = ({
   return (
     <div className={styles.transaction}>
       <div className={styles.content}>
-        <div className={styles.icon}>{isIn ? 'in' : 'out'}</div>
+        <div className={styles.icon}><TransactionIcon dir={isIn ? 'down' : 'up'} /></div>
         <div className={styles.headers}>
           <div className={styles.direction}>{isIn ? 'Received' : 'Sent'}</div>
           <div className={styles.secondary}>{isIn ? 'From' : 'To'}</div>
