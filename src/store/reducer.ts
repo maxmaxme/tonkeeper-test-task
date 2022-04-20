@@ -14,11 +14,6 @@ export const reducer = (state: AppContextType<Dispatch<Action>>['state'], action
       ...state,
       transactions: state.transactions.concat(action.payload),
     };
-  case Actions.SET_LAST_TX_ID:
-    return {
-      ...state,
-      lastTxId: action.payload,
-    };
   default:
     // @ts-ignore
     throw new Error(`reducer for ${action.type} not found`);

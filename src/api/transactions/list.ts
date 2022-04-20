@@ -45,20 +45,27 @@ type Props = {
 export const getTransactionList = ({
   address,
   limit,
-}: Props): Promise<Transaction[]> => {
+  transactionId,
+}: Props): Promise<{
+  transactions: Transaction[];
+  nextTransactionId: TransactionId;
+}> => {
   return fetch(getMethodUrl('getTransactions', {
     address,
-    limit,
+    limit: limit + 1,
     to_lt: 0,
     archival: 0,
-    // lt: transactionId?.lt, // todo
-    // hash: transactionId?.hash,
+    lt: transactionId?.lt,
+    hash: transactionId?.hash,
   }))
     .then((response) => response.json())
-    .then(({ ok, result, error }: Response): Transaction[] => {
+    .then(({ ok, result, error }: Response) => {
       if (!ok || result === undefined) {
         throw new Error(error);
       }
-      return result.map(formatTransaction);
+      return {
+        transactions: result.slice(0, limit).map(formatTransaction),
+        nextTransactionId: result[limit]?.transaction_id,
+      };
     });
 };

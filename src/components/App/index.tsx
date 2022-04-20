@@ -1,35 +1,55 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { TransactionsList } from '../TransactionsList';
 import styles from './index.css';
 import { getTransactionList } from '../../api/transactions/list';
 import { Actions } from '../../store/actions';
 import { AppContext } from '../../store/context';
+import { TransactionId } from '../../types/transaction';
 
 export const App = () => {
-  const { state: { transactions, lastTxId }, dispatch } = useContext(AppContext);
-  const [isLoading, setIsLoading] = useState(true);
+  const { state: { transactions }, dispatch } = useContext(AppContext);
+  const [isLoading, setIsLoading] = useState(false);
+  const [nextTxId, setNextTxId] = useState<TransactionId | undefined>();
 
-  useEffect(() => {
+  const loadTransactions = useCallback((lastTxId?: TransactionId) => {
+    if (isLoading) {
+      return;
+    }
     setIsLoading(true);
     getTransactionList({
       address: 'EQD2NmD_lH5f5u1Kj3KfGyTvhZSX0Eg6qp2a5IQUKXxOG21n',
-      limit: 5,
+      limit: 2,
       transactionId: lastTxId,
     })
-      .then((data) => {
+      .then(({ transactions, nextTransactionId }) => {
         dispatch({
           type: Actions.APPEND_TRANSACTIONS,
-          payload: data,
+          payload: transactions,
         });
+        dispatch({ type: Actions.SET_DOCUMENT_TITLE, payload: 'Transactions' });
+        setNextTxId(nextTransactionId);
       })
       .finally(() => {
         setIsLoading(false);
       });
-  }, [lastTxId]);
+  }, [dispatch, nextTxId]);
+
+  const onLoadMore = useCallback(() => {
+    if (nextTxId) {
+      loadTransactions(nextTxId);
+    }
+  }, [loadTransactions, nextTxId]);
+
+  useEffect(() => {
+    loadTransactions();
+  }, []);
 
   return (
     <div className={styles.transactionsList}>
-      <TransactionsList transactions={transactions} />
+      <TransactionsList
+        transactions={transactions}
+        onLoadMore={onLoadMore}
+      />
       {isLoading && <div>Loading...</div>}
     </div>
   );

@@ -1,18 +1,17 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Transaction as TransactionType } from '../../types/transaction';
 import { Transaction } from '../Transaction';
 import styles from './index.css';
-import { AppContext } from '../../store/context';
-import { Actions } from '../../store/actions';
 
 type Props = {
   transactions: TransactionType[];
+  onLoadMore(): void;
 };
 
 export const TransactionsList = ({
   transactions,
+  onLoadMore,
 }: Props) => {
-  const { dispatch } = useContext(AppContext);
   return (
     <>
       <div className={styles.list}>
@@ -20,16 +19,17 @@ export const TransactionsList = ({
           <Transaction key={transaction.transaction_id.lt} transaction={transaction} />
         ))}
       </div>
-
-      {transactions.length > 0 && (
-        <div style={{ marginTop: '15px', textAlign: 'center' }}>
-          <button onClick={() => {
-            dispatch({ type: Actions.SET_LAST_TX_ID, payload: transactions[transactions.length - 1].transaction_id });
-          }}>
-          More
-          </button>
-        </div>
-      )}
+      <LoadMoreButton onLoadMore={onLoadMore} />
     </>
+  );
+};
+
+const LoadMoreButton = ({ onLoadMore }: { onLoadMore(): void }) => {
+  return (
+    <div style={{ marginTop: '15px', textAlign: 'center' }}>
+      <button onClick={onLoadMore}>
+        More
+      </button>
+    </div>
   );
 };
