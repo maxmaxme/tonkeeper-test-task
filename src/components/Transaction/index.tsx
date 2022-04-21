@@ -6,6 +6,7 @@ import { TransactionIcon } from '../TransactionIcon';
 
 type Props = {
   transaction: TransactionType;
+  onClick(): void;
 };
 
 const formatwalletNumber = (walletNumber: string) => {
@@ -14,6 +15,7 @@ const formatwalletNumber = (walletNumber: string) => {
 
 export const Transaction = ({
   transaction,
+  onClick,
 }: Props) => {
   const isIn = !!transaction.in_msg.source;
   const msg = isIn ? transaction.in_msg : transaction.out_msgs[0];
@@ -25,7 +27,7 @@ export const Transaction = ({
   const currency = 'TON';
 
   return (
-    <div className={styles.transaction}>
+    <button className={styles.transaction} onClick={onClick}>
       <div className={styles.content}>
         <div className={styles.icon}><TransactionIcon dir={isIn ? 'down' : 'up'} /></div>
         <div className={styles.headers}>
@@ -46,6 +48,6 @@ export const Transaction = ({
       {comment && (
         <div className={styles.comment}>{comment}</div>
       )}
-    </div>
+    </button>
   );
 };

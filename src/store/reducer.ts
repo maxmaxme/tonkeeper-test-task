@@ -14,6 +14,21 @@ export const reducer = (state: AppContextType<Dispatch<Action>>['state'], action
       ...state,
       transactions: state.transactions.concat(action.payload),
     };
+  case Actions.OPEN_MODAL:
+    return {
+      ...state,
+      modals: state.modals.concat(action.payload),
+    };
+  case Actions.CLOSE_MODAL:
+    return {
+      ...state,
+      modals: state.modals.slice(0, -1),
+    };
+  case Actions.SET_ACTIVE_TRANSACTION:
+    return {
+      ...state,
+      activeTransaction: action.payload,
+    };
   default:
     // @ts-ignore
     throw new Error(`reducer for ${action.type} not found`);

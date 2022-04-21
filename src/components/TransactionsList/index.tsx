@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Transaction as TransactionType } from '../../types/transaction';
 import { Transaction } from '../Transaction';
 import styles from './index.css';
+import { AppContext } from '../../store/context';
+import { Actions } from '../../store/actions';
+import { MODALS } from '../../types/modal';
 
 type Props = {
   transactions: TransactionType[];
@@ -12,11 +15,21 @@ export const TransactionsList = ({
   transactions,
   onLoadMore,
 }: Props) => {
+  const { dispatch } = useContext(AppContext);
+  const transactionOnClick = (transaction: TransactionType) => () => {
+    dispatch({ type: Actions.SET_ACTIVE_TRANSACTION, payload: transaction });
+    dispatch({ type: Actions.OPEN_MODAL, payload: MODALS.TRANSACTION_EDIT });
+  };
+
   return (
     <>
       <div className={styles.list}>
         {transactions.map((transaction) => (
-          <Transaction key={transaction.transaction_id.lt} transaction={transaction} />
+          <Transaction
+            key={transaction.transaction_id.lt}
+            transaction={transaction}
+            onClick={transactionOnClick(transaction)}
+          />
         ))}
       </div>
       <LoadMoreButton onLoadMore={onLoadMore} />

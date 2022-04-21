@@ -5,9 +5,10 @@ import { getTransactionList } from '../../api/transactions/list';
 import { Actions } from '../../store/actions';
 import { AppContext } from '../../store/context';
 import { TransactionId } from '../../types/transaction';
+import { Modals } from '../Modals';
 
 export const App = () => {
-  const { state: { transactions }, dispatch } = useContext(AppContext);
+  const { state: { transactions, modals }, dispatch } = useContext(AppContext);
   const [isLoading, setIsLoading] = useState(false);
   const [nextTxId, setNextTxId] = useState<TransactionId | undefined>();
 
@@ -50,6 +51,7 @@ export const App = () => {
         transactions={transactions}
         onLoadMore={onLoadMore}
       />
+      {<Modals modals={modals} />}
       {isLoading && <div>Loading...</div>}
     </div>
   );
