@@ -1,9 +1,10 @@
-import React, { useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
 import cn from 'classnames';
 import { Transaction as TransactionType } from '../../types/transaction';
 import styles from './index.css';
 import { TransactionIcon } from '../TransactionIcon';
 import { getIsInTransaction, getTransactionCurrency, getTransactionDestination, getTransactionMessage, getTransactionValue } from '../../getters/transaction';
+import { AppContext } from '../../store/context';
 
 type Props = {
   transaction: TransactionType;
@@ -18,6 +19,7 @@ export const Transaction = ({
   transaction,
   onClick,
 }: Props) => {
+  const { state: { transactionCustomMessages } } = useContext(AppContext);
   const [
     isIn,
     amount,
@@ -30,7 +32,7 @@ export const Transaction = ({
     getTransactionDestination(transaction),
     getTransactionMessage(transaction),
     getTransactionCurrency(),
-  ], [transaction]);
+  ], [transaction, transactionCustomMessages]);
 
   return (
     <button className={styles.transaction} onClick={onClick}>
