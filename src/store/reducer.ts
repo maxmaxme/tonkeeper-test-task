@@ -2,6 +2,9 @@ import { Dispatch } from 'react';
 import { Action, Actions } from './actions';
 import { AppContextType } from './context';
 import { TransactionDict } from '../types/transaction';
+import { set as setCache } from './cache';
+import { getTransactionCommentCacheKey } from '../types/cache';
+import { getIsInTransaction } from '../getters/transaction';
 
 export const reducer = (state: AppContextType<Dispatch<Action>>['state'], action: Action): AppContextType<Dispatch<Action>>['state'] => {
   switch (action.type) {
@@ -38,6 +41,16 @@ export const reducer = (state: AppContextType<Dispatch<Action>>['state'], action
     return {
       ...state,
       activeTransaction: action.payload,
+    };
+  case Actions.SET_TRANSACTION_CUSTOM_MESSAGE:
+    const isIn = getIsInTransaction(state.transactions[action.payload.transactionId.lt]);
+    setCache(getTransactionCommentCacheKey(action.payload.transactionId, isIn), action.payload.message);
+    return {
+      ...state,
+      transactionCustomMessages: {
+        ...state.transactionCustomMessages,
+        [action.payload.transactionId.lt]: action.payload.message,
+      },
     };
   default:
     // @ts-ignore

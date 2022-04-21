@@ -1,7 +1,7 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback } from 'react';
 import { MODALS, Modals } from '../../../types/modal';
 import styles from './index.css';
-import { AppContext } from '../../../store/context';
+import { TransactionEdit } from './content/TransactionEdit';
 
 type Props = {
   modal: Modals,
@@ -12,11 +12,7 @@ export const Modal = ({ modal, onClose }: Props) => {
   const getContent = useCallback((modalName: Modals) => {
     switch (modalName) {
     case MODALS.TRANSACTION_EDIT: {
-      const { state: { activeTransaction: transaction } } = useContext(AppContext);
-      if (!transaction) {
-        return 'Loading...';
-      }
-      return <div>Transaction Edit {transaction.transaction_id.lt}</div>;
+      return <TransactionEdit />;
     }
     default:
       return null;

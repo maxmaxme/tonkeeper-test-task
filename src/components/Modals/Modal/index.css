@@ -22,7 +22,6 @@
     background: var(--background-color-primary);
     border: 2px solid var(--background-color-light);
     width: 50%;
-    height: 50%;
     border-radius: 5px;
     padding: 20px;
 }

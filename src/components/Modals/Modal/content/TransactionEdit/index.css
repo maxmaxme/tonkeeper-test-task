@@ -1,0 +1,44 @@
+.root {
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.textarea {
+    box-sizing: border-box;
+    width: 100%;
+    resize: none;
+    color: var(--text-color-primary);
+    font-family: inherit;
+    font-size: inherit;
+    border: 1px solid var(--background-color-icon);
+
+    background: var(--background-color-light);
+    padding: 14px 18px;
+    border-radius: 8px 18px 18px 18px;
+    overflow: hidden;
+
+    outline: none;
+}
+
+.textarea:focus {
+    border: 1px solid var(--text-color-primary);
+}
+
+.saveButton {
+    margin-top: 12px;
+    box-sizing: border-box;
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 18px;
+    background: var(--background-color-primary);
+    color: var(--text-color-primary);
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
+    outline: none;
+}
+
+.saveButton:hover {
+    background: var(--background-color-light);
+}

@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import cn from 'classnames';
 import { Transaction as TransactionType } from '../../types/transaction';
 import styles from './index.css';
 import { TransactionIcon } from '../TransactionIcon';
+import { getIsInTransaction, getTransactionCurrency, getTransactionDestination, getTransactionMessage, getTransactionValue } from '../../getters/transaction';
 
 type Props = {
   transaction: TransactionType;
@@ -17,14 +18,19 @@ export const Transaction = ({
   transaction,
   onClick,
 }: Props) => {
-  const isIn = !!transaction.in_msg.source;
-  const msg = isIn ? transaction.in_msg : transaction.out_msgs[0];
-  const {
-    value: amount,
-    destination: walletNumber,
-    message: comment,
-  } = msg;
-  const currency = 'TON';
+  const [
+    isIn,
+    amount,
+    walletNumber,
+    comment,
+    currency,
+  ] = useMemo(() => [
+    getIsInTransaction(transaction),
+    getTransactionValue(transaction),
+    getTransactionDestination(transaction),
+    getTransactionMessage(transaction),
+    getTransactionCurrency(),
+  ], [transaction]);
 
   return (
     <button className={styles.transaction} onClick={onClick}>

@@ -53,7 +53,8 @@ export type Transaction = {
   transaction_id: TransactionId,
   fee: Fee,
   in_msg: TransactionMsg,
-  out_msgs: TransactionMsg[]
+  out_msgs: TransactionMsg[],
 };
 
 export type TransactionDict = {[key: TransactionId['lt']]: Transaction};
+export type TransactionMessagesDict = {[key: TransactionId['lt']]: string};
