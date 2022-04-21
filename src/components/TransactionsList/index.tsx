@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Transaction as TransactionType } from '../../types/transaction';
+import { Transaction as TransactionType, TransactionDict } from '../../types/transaction';
 import { Transaction } from '../Transaction';
 import styles from './index.css';
 import { AppContext } from '../../store/context';
@@ -7,7 +7,7 @@ import { Actions } from '../../store/actions';
 import { MODALS } from '../../types/modal';
 
 type Props = {
-  transactions: TransactionType[];
+  transactions: TransactionDict;
   onLoadMore(): void;
 };
 
@@ -24,7 +24,7 @@ export const TransactionsList = ({
   return (
     <>
       <div className={styles.list}>
-        {transactions.map((transaction) => (
+        {Object.values(transactions).map((transaction) => (
           <Transaction
             key={transaction.transaction_id.lt}
             transaction={transaction}

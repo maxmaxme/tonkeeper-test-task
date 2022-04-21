@@ -1,3 +1,5 @@
+import { Transaction } from '../components/Transaction';
+
 export type TransactionRaw = {
   '@type': string,
   'utime': number,
@@ -53,3 +55,5 @@ export type Transaction = {
   in_msg: TransactionMsg,
   out_msgs: TransactionMsg[]
 };
+
+export type TransactionDict = {[key: TransactionId['lt']]: Transaction};

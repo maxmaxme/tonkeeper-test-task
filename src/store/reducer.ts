@@ -1,6 +1,7 @@
 import { Dispatch } from 'react';
 import { Action, Actions } from './actions';
 import { AppContextType } from './context';
+import { TransactionDict } from '../types/transaction';
 
 export const reducer = (state: AppContextType<Dispatch<Action>>['state'], action: Action): AppContextType<Dispatch<Action>>['state'] => {
   switch (action.type) {
@@ -10,9 +11,18 @@ export const reducer = (state: AppContextType<Dispatch<Action>>['state'], action
       documentTitle: action.payload,
     };
   case Actions.APPEND_TRANSACTIONS:
+    const transactionDict: TransactionDict = action.payload.reduce((prev, transaction) => {
+      return {
+        ...prev,
+        [transaction.transaction_id.lt]: transaction,
+      };
+    }, {});
     return {
       ...state,
-      transactions: state.transactions.concat(action.payload),
+      transactions: {
+        ...state.transactions,
+        ...transactionDict,
+      },
     };
   case Actions.OPEN_MODAL:
     return {
