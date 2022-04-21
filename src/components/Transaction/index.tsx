@@ -20,6 +20,7 @@ export const Transaction = ({
   onClick,
 }: Props) => {
   const { state: { transactionCustomMessages } } = useContext(AppContext);
+  const transactionCustomMessage = transactionCustomMessages[transaction.transaction_id.lt];
   const [
     isIn,
     amount,
@@ -30,9 +31,9 @@ export const Transaction = ({
     getIsInTransaction(transaction),
     getTransactionValue(transaction),
     getTransactionDestination(transaction),
-    getTransactionMessage(transaction),
+    getTransactionMessage(transaction, transactionCustomMessage),
     getTransactionCurrency(),
-  ], [transaction, transactionCustomMessages]);
+  ], [transaction, transactionCustomMessage]);
 
   return (
     <button className={styles.transaction} onClick={onClick}>

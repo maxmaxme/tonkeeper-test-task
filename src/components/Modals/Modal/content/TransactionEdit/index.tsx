@@ -22,14 +22,15 @@ const handleKeyDown = (e: any) => {
 };
 
 export const TransactionEdit = () => {
-  const { state: { activeTransaction: transaction }, dispatch } = useContext(AppContext);
+  const { state: { activeTransaction: transaction, transactionCustomMessages }, dispatch } = useContext(AppContext);
   const [value, setValue] = useState('');
   if (!transaction) {
     return null;
   }
+  const transactionCustomMessage = transactionCustomMessages[transaction.transaction_id.lt];
   useEffect(() => {
-    setValue(getTransactionMessage(transaction));
-  }, [transaction]);
+    setValue(getTransactionMessage(transaction, transactionCustomMessage));
+  }, [transaction, transactionCustomMessage]);
 
   const onSave = useCallback(() => {
     dispatch({ type: Actions.CLOSE_MODAL });
