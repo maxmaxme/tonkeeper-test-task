@@ -36,6 +36,7 @@ export const TransactionEdit = () => {
   useEffect(() => {
     if (textarea.current) {
       resizeTextArea(textarea.current)();
+      textarea.current.focus();
     }
   }, [textarea.current]);
 
