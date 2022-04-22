@@ -1,0 +1,17 @@
+.comment {
+  margin-left: 70px;
+  margin-right: 76px;
+  margin-top: 12px;
+
+  background: var(--background-color-light);
+  padding: 14px 18px;
+  border-radius: 8px 18px 18px 18px;
+  overflow: hidden;
+  word-wrap: anywhere;
+  hyphens: auto;
+
+  white-space: break-spaces;
+
+  max-height: 150px;
+  overflow-y: auto;
+}

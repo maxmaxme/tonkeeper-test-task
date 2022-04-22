@@ -6,6 +6,7 @@ import { TransactionIcon } from '../TransactionIcon';
 import { getIsInTransaction, getTransactionCurrency, getTransactionDestination, getTransactionMessage, getTransactionValue } from '../../getters/transaction';
 import { AppContext } from '../../store/context';
 import { CopyToClipboard } from '../CopyToClipboard';
+import { TransactionComment } from './TransactionComment';
 
 type Props = {
   transaction: TransactionType;
@@ -58,7 +59,7 @@ export const Transaction = ({
         </div>
       </div>
       {comment && (
-        <div className={styles.comment}>{comment}</div>
+        <TransactionComment text={comment} />
       )}
     </div>
   );

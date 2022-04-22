@@ -1,29 +1,30 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { AppContext } from '../../../../../store/context';
 import { getTransactionMessage, getTransactionOriginalMessage } from '../../../../../getters/transaction';
 import styles from './index.css';
 import { Actions } from '../../../../../store/actions';
 
-const handleKeyDown = (e: any) => {
+const resizeTextArea = (target: HTMLTextAreaElement) => () => {
   // Reset field height
-  e.target.style.height = 'inherit';
+  target.style.height = 'inherit';
 
   // Get the computed styles for the element
-  const computed = window.getComputedStyle(e.target);
+  const computed = window.getComputedStyle(target);
 
   // Calculate the height
   const height = parseInt(computed.getPropertyValue('border-top-width'), 10) +
     parseInt(computed.getPropertyValue('padding-top'), 10) +
-    e.target.scrollHeight +
+    target.scrollHeight +
     parseInt(computed.getPropertyValue('padding-bottom'), 10) +
     parseInt(computed.getPropertyValue('border-bottom-width'), 10);
 
-  e.target.style.height = `${Math.min(height, 300)}px`;
+  target.style.height = `${Math.min(height, 300)}px`;
 };
 
 export const TransactionEdit = () => {
   const { state: { activeTransaction: transaction, transactionCustomMessages }, dispatch } = useContext(AppContext);
   const [value, setValue] = useState('');
+  const textarea = useRef<HTMLTextAreaElement>(null);
   if (!transaction) {
     return null;
   }
@@ -31,6 +32,12 @@ export const TransactionEdit = () => {
   useEffect(() => {
     setValue(getTransactionMessage(transaction, transactionCustomMessage));
   }, [transaction, transactionCustomMessage]);
+
+  useEffect(() => {
+    if (textarea.current) {
+      resizeTextArea(textarea.current)();
+    }
+  }, [textarea.current]);
 
   const onSave = useCallback(() => {
     dispatch({ type: Actions.CLOSE_MODAL });
@@ -46,11 +53,14 @@ export const TransactionEdit = () => {
   return (
     <div className={styles.root}>
       <textarea
+        ref={textarea}
         className={styles.textarea}
-        onKeyDown={handleKeyDown}
         value={value}
         placeholder={getTransactionOriginalMessage(transaction)}
         onChange={(e) => {
+          if (textarea.current) {
+            resizeTextArea(textarea.current)();
+          }
           setValue(e.target.value);
         }}
       />
