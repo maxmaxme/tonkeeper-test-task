@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { Transaction as TransactionType, TransactionDict } from '../../types/transaction';
 import { Transaction } from '../Transaction';
 import styles from './index.css';
@@ -17,22 +17,24 @@ export const TransactionsList = ({
 }: Props) => {
   const [onScrollEnabled, setOnScrollEnabled] = useState(true);
   const { dispatch } = useContext(AppContext);
-  const transactionOnClick = (transaction: TransactionType) => () => {
+  const transactionOnClick = useCallback((transaction: TransactionType) => () => {
     dispatch({ type: Actions.SET_ACTIVE_TRANSACTION, payload: transaction });
     dispatch({ type: Actions.OPEN_MODAL, payload: MODALS.TRANSACTION_EDIT });
-  };
+  }, [dispatch]);
 
-  window.onscroll = () => {
-    if (!onScrollEnabled) {
-      return;
-    }
-    if (window.innerHeight + document.documentElement.scrollTop > document.documentElement.offsetHeight - 50) {
-      setOnScrollEnabled(false);
-      onLoadMore().then(() => {
-        setOnScrollEnabled(true);
-      });
-    }
-  };
+  useEffect(() => {
+    window.onscroll = () => {
+      if (!onScrollEnabled) {
+        return;
+      }
+      if (window.innerHeight + document.documentElement.scrollTop > document.documentElement.offsetHeight - 50) {
+        setOnScrollEnabled(false);
+        onLoadMore().finally(() => {
+          setOnScrollEnabled(true);
+        });
+      }
+    };
+  }, [onLoadMore, onScrollEnabled]);
 
   return (
     <div className={styles.list}>

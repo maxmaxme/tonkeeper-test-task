@@ -37,7 +37,7 @@ export const Transaction = ({
   ], [transaction, transactionCustomMessage]);
 
   return (
-    <button className={styles.transaction} onClick={onClick}>
+    <div role="button" className={styles.transaction} onClick={onClick}>
       <div className={styles.content}>
         <div className={styles.icon}><TransactionIcon dir={isIn ? 'down' : 'up'} /></div>
         <div className={styles.headers}>
@@ -60,6 +60,6 @@ export const Transaction = ({
       {comment && (
         <div className={styles.comment}>{comment}</div>
       )}
-    </button>
+    </div>
   );
 };

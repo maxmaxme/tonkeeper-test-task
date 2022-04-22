@@ -8,15 +8,10 @@ import { TransactionId } from '../../types/transaction';
 import { Modals } from '../Modals';
 import { Loader } from '../Loader';
 
-const delay = (ms: number) => {
-  return new Promise((resolve) => {
-    setTimeout(resolve, ms);
-  });
-};
-
 export const App = () => {
   const { state: { transactions, modals }, dispatch } = useContext(AppContext);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [nextTxId, setNextTxId] = useState<TransactionId | undefined>();
 
   const loadTransactions = useCallback((lastTxId?: TransactionId) => {
@@ -24,12 +19,13 @@ export const App = () => {
       return Promise.reject(new Error('Already loading'));
     }
     setIsLoading(true);
-    return delay(1200).then(() => getTransactionList({
+    return getTransactionList({
       address: 'EQD2NmD_lH5f5u1Kj3KfGyTvhZSX0Eg6qp2a5IQUKXxOG21n',
       limit: 20,
       transactionId: lastTxId,
     })
       .then(({ transactions, nextTransactionId }) => {
+        setError(null);
         dispatch({
           type: Actions.APPEND_TRANSACTIONS,
           payload: transactions,
@@ -37,9 +33,12 @@ export const App = () => {
         dispatch({ type: Actions.SET_DOCUMENT_TITLE, payload: 'Transactions' });
         setNextTxId(nextTransactionId);
       })
+      .catch((error: Error) => {
+        setError(error.message);
+      })
       .finally(() => {
         setIsLoading(false);
-      }));
+      });
   }, [dispatch, nextTxId]);
 
   const onLoadMore = useCallback(() => {
@@ -57,9 +56,22 @@ export const App = () => {
     <div className={styles.transactionsList}>
       <TransactionsList
         transactions={transactions}
-        onLoadMore={onLoadMore}
+        onLoadMore={() => {
+          if (!error) {
+            return onLoadMore();
+          }
+          return Promise.reject(new Error('Error'));
+        }}
       />
       {<Modals modals={modals} />}
+      {error && <div className={styles.error}>
+        {error}
+        {isLoading ? (<div>Loading...</div>) : (
+          <div>
+            <button onClick={() => onLoadMore()}>Retry</button>
+          </div>
+        )}
+      </div>}
       {isLoading && <Loader />}
     </div>
   );
