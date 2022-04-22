@@ -1,3 +1,7 @@
+.modal {
+    z-index: 10;
+}
+
 .paranja {
     width: 100vw;
     height: 100vh;

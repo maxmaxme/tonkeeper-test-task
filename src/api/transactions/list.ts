@@ -56,7 +56,7 @@ export const getTransactionList = ({
     to_lt: 0,
     archival: 0,
     lt: transactionId?.lt,
-    hash: transactionId?.hash,
+    hash: transactionId ? encodeURIComponent(transactionId.hash) : undefined,
   }))
     .then((response) => response.json())
     .then(({ ok, result, error }: Response) => {

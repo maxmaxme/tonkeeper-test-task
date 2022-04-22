@@ -25,9 +25,11 @@ export const Modal = ({ modal, onClose }: Props) => {
   }
 
   return (
-    <div className={styles.paranja} onClick={onClose}>
-      <button className={styles.closeIcon} onClick={onClose}>Close</button>
-      <div className={styles.content} onClick={(e) => e.stopPropagation()}>
+    <div className={styles.modal}>
+      <div className={styles.paranja} onClick={onClose}>
+        <button className={styles.closeIcon} onClick={onClose}>Close</button>
+      </div>
+      <div className={styles.content}>
         {content}
       </div>
     </div>

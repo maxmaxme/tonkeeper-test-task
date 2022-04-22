@@ -6,6 +6,13 @@ import { Actions } from '../../store/actions';
 import { AppContext } from '../../store/context';
 import { TransactionId } from '../../types/transaction';
 import { Modals } from '../Modals';
+import { Loader } from '../Loader';
+
+const delay = (ms: number) => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+};
 
 export const App = () => {
   const { state: { transactions, modals }, dispatch } = useContext(AppContext);
@@ -14,12 +21,12 @@ export const App = () => {
 
   const loadTransactions = useCallback((lastTxId?: TransactionId) => {
     if (isLoading) {
-      return;
+      return Promise.reject(new Error('Already loading'));
     }
     setIsLoading(true);
-    getTransactionList({
+    return delay(1200).then(() => getTransactionList({
       address: 'EQD2NmD_lH5f5u1Kj3KfGyTvhZSX0Eg6qp2a5IQUKXxOG21n',
-      limit: 2,
+      limit: 20,
       transactionId: lastTxId,
     })
       .then(({ transactions, nextTransactionId }) => {
@@ -32,13 +39,14 @@ export const App = () => {
       })
       .finally(() => {
         setIsLoading(false);
-      });
+      }));
   }, [dispatch, nextTxId]);
 
   const onLoadMore = useCallback(() => {
     if (nextTxId) {
-      loadTransactions(nextTxId);
+      return loadTransactions(nextTxId);
     }
+    return Promise.reject(new Error('No next transaction id'));
   }, [loadTransactions, nextTxId]);
 
   useEffect(() => {
@@ -52,7 +60,7 @@ export const App = () => {
         onLoadMore={onLoadMore}
       />
       {<Modals modals={modals} />}
-      {isLoading && <div>Loading...</div>}
+      {isLoading && <Loader />}
     </div>
   );
 };

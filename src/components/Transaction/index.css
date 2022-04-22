@@ -7,6 +7,7 @@
     text-align: inherit;
     font: inherit;
     cursor: pointer;
+    outline: none;
 
     background: var(--background-color-secondary);
     padding: 20px;
@@ -28,6 +29,8 @@
     border-radius: 8px 18px 18px 18px;
     overflow: hidden;
     word-wrap: anywhere; /* todo */
+
+    white-space: break-spaces;
 }
 
 .icon {
