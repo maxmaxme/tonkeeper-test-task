@@ -9,6 +9,9 @@
     background: inherit;
 }
 
+.button:focus-visible {
+    outline: 1px solid;
+}
 .copiedLabel {
     display: inline-block;
     font-size: 12px;

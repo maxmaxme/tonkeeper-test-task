@@ -38,7 +38,7 @@ export const Transaction = ({
   ], [transaction, transactionCustomMessage]);
 
   return (
-    <div role="button" className={styles.transaction} onClick={onClick}>
+    <div tabIndex={0} role="button" className={styles.transaction} onClick={onClick}>
       <div className={styles.content}>
         <div className={styles.icon}><TransactionIcon dir={isIn ? 'down' : 'up'} /></div>
         <div className={styles.headers}>

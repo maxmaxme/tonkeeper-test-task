@@ -2,6 +2,12 @@
     background: var(--background-color-secondary);
     padding: 20px;
     border-bottom: 1px solid var(--background-color-light);
+    outline: none;
+    cursor: pointer;
+}
+
+.transaction:focus-visible {
+    outline: 1px solid;
 }
 
 .transaction .content {
