@@ -1,0 +1,15 @@
+.button {
+    display: inline;
+    border: none;
+    color: inherit;
+    text-align: inherit;
+    font: inherit;
+    cursor: pointer;
+    outline: none;
+    background: inherit;
+}
+
+.copiedLabel {
+    display: inline-block;
+    font-size: 12px;
+}

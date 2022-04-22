@@ -5,14 +5,15 @@ import styles from './index.css';
 import { TransactionIcon } from '../TransactionIcon';
 import { getIsInTransaction, getTransactionCurrency, getTransactionDestination, getTransactionMessage, getTransactionValue } from '../../getters/transaction';
 import { AppContext } from '../../store/context';
+import { CopyToClipboard } from '../CopyToClipboard';
 
 type Props = {
   transaction: TransactionType;
   onClick(): void;
 };
 
-const formatwalletNumber = (walletNumber: string) => {
-  return walletNumber.slice(0, 3) + '...' + walletNumber.slice(-3);
+const formatWalletNumber = (walletNumber: string) => {
+  return walletNumber.slice(0, 4) + '···' + walletNumber.slice(-4);
 };
 
 export const Transaction = ({
@@ -50,7 +51,9 @@ export const Transaction = ({
             {currency}
           </div>
           <div className={styles.walletNumber}>
-            {formatwalletNumber(walletNumber)}
+            <CopyToClipboard text={walletNumber}>
+              {formatWalletNumber(walletNumber)}
+            </CopyToClipboard>
           </div>
         </div>
       </div>
