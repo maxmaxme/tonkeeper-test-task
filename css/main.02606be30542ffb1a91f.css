@@ -1,0 +1,285 @@
+.jZ1Pz4CCgt7BUMLQLGbD {
+    /* Reset button style */
+    display: block;
+    border: none;
+    width: 100%;
+    color: inherit;
+    text-align: inherit;
+    font: inherit;
+    cursor: pointer;
+    outline: none;
+
+    background: var(--background-color-secondary);
+    padding: 20px;
+    border-bottom: 1px solid var(--background-color-light);
+}
+
+.jZ1Pz4CCgt7BUMLQLGbD .mz_pmfUS9YyiC6N8pbCL {
+    overflow: hidden;
+    display: flex;
+}
+
+.jZ1Pz4CCgt7BUMLQLGbD .Idv5bGsfRuuYbzyd5jgv {
+    margin-left: 70px;
+    margin-right: 76px;
+    margin-top: 12px;
+
+    background: var(--background-color-light);
+    padding: 14px 18px;
+    border-radius: 8px 18px 18px 18px;
+    overflow: hidden;
+    word-wrap: anywhere;
+    hyphens: auto;
+
+    white-space: break-spaces;
+}
+
+.iyYE77YY5FO5pU3cY7Io {
+    flex: none;
+}
+
+.AtHkSCn7eAXcWAP7ZvsO {
+    margin-left: 20px;
+    padding-top: 5px;
+    flex: 1;
+    overflow: hidden;
+}
+
+.AtHkSCn7eAXcWAP7ZvsO .rJQtUlkUiNhMX9toJl_1 {
+    font-weight: bold;
+}
+
+.AtHkSCn7eAXcWAP7ZvsO .P5sWpPeXsOt2vj5r0rsj {
+    color: var(--text-color-secondary);
+    margin-top: 6px;
+}
+
+.nXxOfp2MQFQerntQwV1p {
+    justify-content: end;
+    text-align: right;
+}
+
+.nXxOfp2MQFQerntQwV1p .kCzz1i7rTA7bszY4H_sH {
+    font-weight: bold;
+}
+.nXxOfp2MQFQerntQwV1p .kCzz1i7rTA7bszY4H_sH.u4nWM5OwcDeNb9qjBu8D {
+    color: var(--text-color-success);
+}
+
+.nXxOfp2MQFQerntQwV1p .I8zIyCFXksKqmD34knUA {
+    margin-top: 6px;
+    color: var(--text-color-secondary);
+}
+
+.Q5U7JEBlUUZYAsF_JPci {
+    width: 50px;
+    height: 50px;
+    font-size: 55px;
+
+    background: var(--background-color-icon);
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+}
+.lNJg5XEZ0oq6ZNOrI7ry {
+    position: absolute;
+    top: -12px;
+    left: 8px;
+    color: var(--text-color-secondary);
+}
+
+.fwxoVQz_oO0NfN5fwSPB {
+    display: inline;
+    border: none;
+    color: inherit;
+    text-align: inherit;
+    font: inherit;
+    cursor: pointer;
+    outline: none;
+    background: inherit;
+}
+
+.rmhCTi5VBcLoIPAgoEBE {
+    display: inline-block;
+    font-size: 12px;
+}
+
+.lkA2t8YcNPr2pIqqbGxP {
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+.VjkIZaAin647_lRTaYA4 {
+    padding: 10px;
+}
+
+.VEeCvkkc0btcIjqcUY0P {
+    z-index: 10;
+}
+
+.Jz67FPy7WyyZGD7SLqZs {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.xvouOJCGbO0UbDekBiPN {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.ZR2uwlnuIzl0hUVhdP1V {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--background-color-primary);
+    border: 2px solid var(--background-color-light);
+    width: 50%;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.uWqG9L6acXVbc7G7v4W1 {
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.u9sXvThA0GXtjsE3ohrm {
+    box-sizing: border-box;
+    width: 100%;
+    resize: none;
+    color: var(--text-color-primary);
+    font-family: inherit;
+    font-size: inherit;
+    border: 1px solid var(--background-color-icon);
+
+    background: var(--background-color-light);
+    padding: 14px 18px;
+    border-radius: 8px 18px 18px 18px;
+    overflow-y: auto;
+
+    outline: none;
+}
+
+.u9sXvThA0GXtjsE3ohrm:focus {
+    border: 1px solid var(--text-color-primary);
+}
+
+.NXe0huoQEbhR3S3De6Iz {
+    margin-top: 12px;
+    box-sizing: border-box;
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 18px;
+    background: var(--background-color-primary);
+    color: var(--text-color-primary);
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
+    outline: none;
+}
+
+.NXe0huoQEbhR3S3De6Iz:hover {
+    background: var(--background-color-light);
+}
+
+.yCWVBHI5UlbZNFfxVzOO,
+.yCWVBHI5UlbZNFfxVzOO:after {
+    border-radius: 50%;
+    width: 2em;
+    height: 2em;
+}
+.yCWVBHI5UlbZNFfxVzOO {
+    margin: 60px auto;
+    font-size: 10px;
+    position: relative;
+    text-indent: -9999em;
+    border-top: 0.3em solid rgba(255, 255, 255, 0.2);
+    border-right: 0.3em solid rgba(255, 255, 255, 0.2);
+    border-bottom: 0.3em solid rgba(255, 255, 255, 0.2);
+    border-left: 0.3em solid #ffffff;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-animation: ZAcjK1OKD4WyogFDXHeQ 0.5s infinite linear;
+    animation: ZAcjK1OKD4WyogFDXHeQ 0.5s infinite linear;
+}
+@-webkit-keyframes ZAcjK1OKD4WyogFDXHeQ {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+@keyframes ZAcjK1OKD4WyogFDXHeQ {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+:root {
+    --background-color-primary: #131d27;
+    --background-color-secondary: #202c3a;
+    --background-color-light: #293545;
+    --background-color-icon: #293446;
+
+    --text-color-primary: #fbfdfc;
+    --text-color-secondary: #8490a0;
+    --text-color-success: #34cd84;
+}
+
+@font-face {
+    font-family: "Montserrat";
+    src: url(../ac98a5f5ca71180fe293.ttf) format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Montserrat";
+    src: url(../ffb8374a74a57a2056b5.ttf) format("truetype");
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Montserrat";
+    src: url(../63fae500fdcf19ce83d4.ttf) format("truetype");
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Montserrat";
+    src: url(../6bfb0703bffc1e9c85ae.ttf) format("truetype");
+    font-weight: bold;
+    font-style: italic;
+}
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  background-color: var(--background-color-primary);
+  color: var(--text-color-primary);
+}
+
