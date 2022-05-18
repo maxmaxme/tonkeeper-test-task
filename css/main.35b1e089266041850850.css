@@ -78,6 +78,7 @@
     cursor: pointer;
     outline: none;
     background: inherit;
+    padding: 0;
 }
 
 .fwxoVQz_oO0NfN5fwSPB:focus-visible {
@@ -86,6 +87,7 @@
 .rmhCTi5VBcLoIPAgoEBE {
     display: inline-block;
     font-size: 12px;
+    padding: 0 6px;
 }
 
 .pj8_prxmLEnD89JxQx8D {
