@@ -3,7 +3,7 @@ import cn from 'classnames';
 import { Transaction as TransactionType } from '../../types/transaction';
 import styles from './index.css';
 import { TransactionIcon } from '../TransactionIcon';
-import { getIsInTransaction, getTransactionCurrency, getTransactionDestination, getTransactionMessage, getTransactionValue } from '../../getters/transaction';
+import { getIsInTransaction, getTransactionCurrency, getTransactionDestination, getTransactionFee, getTransactionMessage, getTransactionValue } from '../../getters/transaction';
 import { AppContext } from '../../store/context';
 import { CopyToClipboard } from '../CopyToClipboard';
 import { TransactionComment } from './TransactionComment';
@@ -26,12 +26,14 @@ export const Transaction = ({
   const [
     isIn,
     amount,
+    transactionFee,
     walletNumber,
     comment,
     currency,
   ] = useMemo(() => [
     getIsInTransaction(transaction),
     getTransactionValue(transaction),
+    getTransactionFee(transaction),
     getTransactionDestination(transaction),
     getTransactionMessage(transaction, transactionCustomMessage),
     getTransactionCurrency(),
@@ -43,6 +45,7 @@ export const Transaction = ({
         <div className={styles.icon}><TransactionIcon dir={isIn ? 'down' : 'up'} /></div>
         <div className={styles.headers}>
           <div className={styles.direction}>{isIn ? 'Received' : 'Sent'}</div>
+          {transactionFee > 0 && (<div className={styles.secondary}>Fee</div>)}
           <div className={styles.secondary}>{isIn ? 'From' : 'To'}</div>
         </div>
         <div className={styles.amount}>
@@ -51,6 +54,7 @@ export const Transaction = ({
             {amount}&nbsp;
             {currency}
           </div>
+          {transactionFee > 0 && (<div className={styles.walletNumber}>- {transactionFee}</div>)}
           <div className={styles.walletNumber}>
             <CopyToClipboard text={walletNumber}>
               {formatWalletNumber(walletNumber)}

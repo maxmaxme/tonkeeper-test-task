@@ -8,11 +8,13 @@ type Response = {
   code?: number;
 }
 
+const formatAmount = (amount: string): string => (Number(amount) / 1e9).toFixed(9).replace(/\.?0+$/, '');
+
 const formatMsg = (msg: TransactionRaw['in_msg']): Transaction['in_msg'] => {
   return {
     source: msg.source,
     destination: msg.destination,
-    value: msg.value,
+    value: formatAmount(msg.value),
     message: msg.message,
   };
 };
@@ -28,9 +30,9 @@ const formatTransaction = (transaction: TransactionRaw): Transaction => ({
   transaction_id: formatTransactionId(transaction.transaction_id),
   time: transaction.utime,
   fee: {
-    fee: transaction.fee,
-    other_fee: transaction.other_fee,
-    storage_fee: transaction.storage_fee,
+    fee: formatAmount(transaction.fee),
+    other_fee: formatAmount(transaction.other_fee),
+    storage_fee: formatAmount(transaction.storage_fee),
   },
   in_msg: formatMsg(transaction.in_msg),
   out_msgs: transaction.out_msgs.map(formatMsg),

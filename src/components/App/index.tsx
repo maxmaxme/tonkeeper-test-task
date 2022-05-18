@@ -14,9 +14,12 @@ export const App = () => {
   const [error, setError] = useState<string | null>(null);
   const [nextTxId, setNextTxId] = useState<TransactionId | undefined>();
 
-  const loadTransactions = useCallback((lastTxId?: TransactionId) => {
+  const loadTransactions = useCallback((lastTxId?: TransactionId, tryNum = 0) => {
     if (isLoading) {
       return Promise.reject(new Error('Already loading'));
+    }
+    if (tryNum > 3) {
+      return Promise.reject(new Error('Too many tries'));
     }
     setIsLoading(true);
     return getTransactionList({
@@ -35,6 +38,9 @@ export const App = () => {
       })
       .catch((error: Error) => {
         setError(error.message);
+        setTimeout(() => {
+          loadTransactions(lastTxId, tryNum + 1);
+        }, 1500);
       })
       .finally(() => {
         setIsLoading(false);
